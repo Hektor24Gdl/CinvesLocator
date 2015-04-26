@@ -19,7 +19,9 @@ public class DAO {
 
     private static SessionFactory sf;
     private static final String AG_NAME = "Agent.findByName";
-
+    private static final String AG_TYPE = "Agent.findByType";
+    private static final String TY_TYPE = "Type.findByType";
+    
     public static Session getSession() throws DatabaseException {
         if (sf == null) {
 
@@ -58,7 +60,27 @@ public class DAO {
 
     public static Agent getAgent(String value) throws DatabaseException {
         List<Agent> agents = getObject(Agent.class, AG_NAME, "name", value);
-        return agents.get(0);
+        
+        if(agents.size() > 0){
+            return agents.get(0);
+        }
+        
+        return null;
+    }
+    
+    public static Type getType(String value) throws DatabaseException {
+        List<Type> types = getObject(Type.class, TY_TYPE, "type", value);
+        
+        if(types.size() > 0){
+            return types.get(0);
+        }
+        
+        return null;
+    }
+    
+    public static List<Agent> getTypeAgent(String value) throws DatabaseException {
+        List<Agent> agents = getObject(Agent.class, AG_TYPE, "type", value);
+        return agents;
     }
 
 }
