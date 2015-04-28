@@ -28,7 +28,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Agent.findByIdagente", query = "SELECT a FROM Agent a WHERE a.idagente = :idagente"),
     @NamedQuery(name = "Agent.findByName", query = "SELECT a FROM Agent a WHERE a.name = :name"),
     @NamedQuery(name = "Agent.findByDevice", query = "SELECT a FROM Agent a WHERE a.device = :device"),
-    @NamedQuery(name = "Agent.findByLastLogin", query = "SELECT a FROM Agent a WHERE a.lastLogin = :lastLogin")})
+    @NamedQuery(name = "Agent.findByLastLogin", query = "SELECT a FROM Agent a WHERE a.lastLogin = :lastLogin"),
+    @NamedQuery(name = "Agent.findByType", query = "SELECT a FROM Agent a WHERE a.typeIdtype.type = :type"),
+})
 public class Agent implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
