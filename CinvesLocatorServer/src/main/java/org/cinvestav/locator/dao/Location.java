@@ -4,6 +4,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -23,10 +25,12 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Location.findAll", query = "SELECT l FROM Location l"),
     @NamedQuery(name = "Location.findByIdlocation", query = "SELECT l FROM Location l WHERE l.idlocation = :idlocation"),
     @NamedQuery(name = "Location.findByTimestamp", query = "SELECT l FROM Location l WHERE l.timestamp = :timestamp"),
-    @NamedQuery(name = "Location.findByCoordinates", query = "SELECT l FROM Location l WHERE l.coordinates = :coordinates")})
+    @NamedQuery(name = "Location.findByCoordinates", query = "SELECT l FROM Location l WHERE l.coordinates = :coordinates"),
+    @NamedQuery(name = "Location.findByAgent", query = "SELECT l FROM Location l WHERE l.agenteIdagente.name = :name ORDER BY l.timestamp DESC")})
 public class Location implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "idlocation", nullable = false)
     private Integer idlocation;

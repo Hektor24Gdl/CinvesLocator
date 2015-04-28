@@ -21,6 +21,7 @@ public class DAO {
     private static final String AG_NAME = "Agent.findByName";
     private static final String AG_TYPE = "Agent.findByType";
     private static final String TY_TYPE = "Type.findByType";
+    private static final String LOC_AGENT = "Location.findByAgent";
     
     public static Session getSession() throws DatabaseException {
         if (sf == null) {
@@ -36,7 +37,7 @@ public class DAO {
         return sf.getCurrentSession();
     }
 
-    public static <T extends Serializable> List<T> getObject(Class<T> entityClass, String namedQuery, String parameter, String value) throws DatabaseException {
+    private static <T extends Serializable> List<T> getObject(Class<T> entityClass, String namedQuery, String parameter, String value) throws DatabaseException {
 
         if (namedQuery == null || value == null) {
             Logger logger = Logger.getLogger(DAO.class.getName());
@@ -57,6 +58,15 @@ public class DAO {
 
         return resultList;
     }
+    
+    private static <T extends Serializable> void saveObject(T object) throws DatabaseException{
+        Session s = getSession();
+        s.beginTransaction();
+                
+        s.saveOrUpdate(object);
+        s.getTransaction().commit();
+        
+    }
 
     public static Agent getAgent(String value) throws DatabaseException {
         List<Agent> agents = getObject(Agent.class, AG_NAME, "name", value);
@@ -66,6 +76,17 @@ public class DAO {
         }
         
         return null;
+    }
+    
+    public static void saveAgent(String name, String device, String last_login, String type) throws DatabaseException{
+        Agent agent = new Agent();
+        agent.setName(name);
+        agent.setDevice(device);
+        agent.setLastLogin(last_login);
+        Type t = getType(type);
+        agent.setTypeIdtype(t);
+        
+        saveObject(agent);
     }
     
     public static Type getType(String value) throws DatabaseException {
@@ -81,6 +102,26 @@ public class DAO {
     public static List<Agent> getTypeAgent(String value) throws DatabaseException {
         List<Agent> agents = getObject(Agent.class, AG_TYPE, "type", value);
         return agents;
+    }
+    
+    public static Location getLastLocation(String value) throws DatabaseException {
+        List<Location> location = getObject(Location.class, LOC_AGENT, "name", value);
+        
+        if(location.size() > 0){
+            return location.get(0);
+        }
+        
+        return null;
+    }
+    
+    public static void saveLocation(String timestamp, String coordinates, String agent) throws DatabaseException{
+        Agent ag = getAgent(agent);
+        Location location = new Location();
+        location.setAgenteIdagente(ag);
+        location.setTimestamp(timestamp);
+        location.setCoordinates(coordinates);
+        
+        saveObject(location);
     }
 
 }
