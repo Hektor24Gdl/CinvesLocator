@@ -1,5 +1,6 @@
 package mx.cinvestav.edu.cinveslocatorclient;
 
+import android.graphics.Point;
 import android.support.v7.app.ActionBarActivity;
 import android.app.Activity;
 import android.support.v7.app.ActionBar;
@@ -44,7 +45,7 @@ public class NavigationDrawerFragment extends Fragment {
      * A pointer to the current callbacks instance (the Activity).
      */
     private NavigationDrawerCallbacks mCallbacks;
-
+    private static String MYSELF = "Celeste";
     /**
      * Helper component that ties the action bar to the navigation drawer.
      */
@@ -74,6 +75,13 @@ public class NavigationDrawerFragment extends Fragment {
             mCurrentSelectedPosition = savedInstanceState.getInt(STATE_SELECTED_POSITION);
             mFromSavedInstanceState = true;
         }
+
+        PointsProvider.setUbicacion( "Celeste", "persona",1,50,50 );
+        PointsProvider.setUbicacion( "Andres","persona",1,800,800);
+        PointsProvider.setUbicacion( "Gibran","persona",1,100,100 );
+        PointsProvider.setUbicacion( "Impresora1","impresora",1,1000,1000);
+        PointsProvider.setUbicacion( "Impresora2", "impresora",1,450,1000);
+        PointsProvider.setUbicacion( "Laboratorio Compu","laboratorio",1,800,1000);
 
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);

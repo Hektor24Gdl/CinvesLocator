@@ -27,4 +27,6 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_navigation">NavigationActivity</string>
     <string name="menu1Title">1</string>
+    <string name="mapText">Mapa Cinvestav</string>
+    <string name="searchPrompt">Que Buscas?</string>
 </resources>
