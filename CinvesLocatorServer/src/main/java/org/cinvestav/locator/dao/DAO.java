@@ -79,7 +79,12 @@ public class DAO {
     }
     
     public static void saveAgent(String name, String device, String last_login, String type) throws DatabaseException{
-        Agent agent = new Agent();
+        Agent agent = getAgent(name);
+        
+        if(agent == null){
+            agent = new Agent();
+        }
+        
         agent.setName(name);
         agent.setDevice(device);
         agent.setLastLogin(last_login);

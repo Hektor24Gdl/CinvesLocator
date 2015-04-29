@@ -53,6 +53,7 @@ public class DAOTest {
     public void getAgentLocation() throws Exception {
         Location response = DAO.getLastLocation("HECTOR");
         assertNotNull(response);
+        System.out.println("Last Location: " + response.getTimestamp());
     }
     
     @Test
