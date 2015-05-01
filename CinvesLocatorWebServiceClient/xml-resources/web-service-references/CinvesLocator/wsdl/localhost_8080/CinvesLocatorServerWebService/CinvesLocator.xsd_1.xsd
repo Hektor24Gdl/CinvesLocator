@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.1-b419 (branches/2.3.1.x-7937; 2014-08-04T08:11:03+0000) JAXWS-RI/2.2.10-b140803.1500 JAXWS-API/2.2.11 JAXB-RI/2.2.10-b140802.1033 JAXB-API/2.2.12-b140109.1041 svn-revision#unknown. --><xs:schema xmlns:tns="http://webservice.locator.cinvestav.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservice.locator.cinvestav.com/">
+
+<xs:element name="LocatorException" type="tns:LocatorException"/>
+
+<xs:element name="agent" type="tns:agent"/>
+
+<xs:element name="getAgent" type="tns:getAgent"/>
+
+<xs:element name="getAgentResponse" type="tns:getAgentResponse"/>
+
+<xs:element name="getLastLocation" type="tns:getLastLocation"/>
+
+<xs:element name="getLastLocationResponse" type="tns:getLastLocationResponse"/>
+
+<xs:element name="getTypeAgent" type="tns:getTypeAgent"/>
+
+<xs:element name="getTypeAgentResponse" type="tns:getTypeAgentResponse"/>
+
+<xs:element name="location" type="tns:location"/>
+
+<xs:element name="saveAgent" type="tns:saveAgent"/>
+
+<xs:element name="saveAgentResponse" type="tns:saveAgentResponse"/>
+
+<xs:element name="saveLocation" type="tns:saveLocation"/>
+
+<xs:element name="saveLocationResponse" type="tns:saveLocationResponse"/>
+
+<xs:element name="type" type="tns:type"/>
+
+<xs:complexType name="saveLocation">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="timestamp" type="xs:string" minOccurs="0"/>
+<xs:element name="coordinates" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveLocationResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="LocatorException">
+<xs:sequence>
+<xs:element name="message" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAgent">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getAgentResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:agent" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="agent">
+<xs:sequence>
+<xs:element name="device" type="xs:string" minOccurs="0"/>
+<xs:element name="idagente" type="xs:int" minOccurs="0"/>
+<xs:element name="lastLogin" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="typeIdtype" type="tns:type" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="type">
+<xs:sequence>
+<xs:element name="idtype" type="xs:int" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLastLocation">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getLastLocationResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:location" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="location">
+<xs:sequence>
+<xs:element name="agenteIdagente" type="tns:agent" minOccurs="0"/>
+<xs:element name="coordinates" type="xs:string" minOccurs="0"/>
+<xs:element name="idlocation" type="xs:int" minOccurs="0"/>
+<xs:element name="timestamp" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveAgent">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="device" type="xs:string" minOccurs="0"/>
+<xs:element name="last_login" type="xs:string" minOccurs="0"/>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="saveAgentResponse">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="getTypeAgent">
+<xs:sequence>
+<xs:element name="type" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getTypeAgentResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:agent" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
