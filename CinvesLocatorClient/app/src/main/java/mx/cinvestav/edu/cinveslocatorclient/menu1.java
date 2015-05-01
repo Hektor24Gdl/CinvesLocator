@@ -40,6 +40,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import mx.cinvestav.edu.cinveslocatorclient.RPC.client.PointsProvider;
+import mx.cinvestav.edu.cinveslocatorclient.RPC.common.MapResource;
+
 /**
  * Created by Celeste on 25/04/2015.
  */
@@ -72,27 +75,14 @@ public class menu1 extends Fragment {
         // imageView.addt  ----------
        //-----------------------------------------------------------AQUI VOY
         c.drawBitmap(img, 0, 0, null);
-        MapResource mr = PointsProvider.getUbicacion("Celeste");
-        c.drawCircle(mr.getPosition().x, mr.getPosition().y, 25.0F, paint);
+        MapResource mr = PointsProvider.getInstance().getUbicacion("Celeste");
+        c.drawCircle(mr.getPosition().getX(), mr.getPosition().getY(), 25.0F, paint);
         //Now scale to imgView
         mapa = bitmap;
         //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight(), false);
         imageView.setAdjustViewBounds(true);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        ViewTreeObserver vto = imageView.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout(){
-                try {
-                    ImageView imageView = (ImageView) getView().findViewById(R.id.imageView2);
-                    Drawable img = imageView.getDrawable();
-                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(mapa, imageView.getWidth(), imageView.getHeight(), false);
-                    imageView.setImageDrawable(new BitmapDrawable(getResources(), scaledBitmap));
-                }catch(Exception ex){
-
-                }
-            }
-        });
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setImageBitmap(mapa);
     }
 
 

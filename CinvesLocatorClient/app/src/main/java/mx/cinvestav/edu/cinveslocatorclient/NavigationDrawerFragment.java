@@ -23,6 +23,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import mx.cinvestav.edu.cinveslocatorclient.RPC.client.PointsProvider;
+
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
  * See the <a href="https://developer.android.com/design/patterns/navigation-drawer.html#Interaction">
@@ -76,13 +78,6 @@ public class NavigationDrawerFragment extends Fragment {
             mFromSavedInstanceState = true;
         }
 
-        PointsProvider.setUbicacion( "Celeste", "persona",1,50,50 );
-        PointsProvider.setUbicacion( "Andres","persona",1,800,800);
-        PointsProvider.setUbicacion( "Gibran","persona",1,100,100 );
-        PointsProvider.setUbicacion( "Impresora1","impresora",1,1000,1000);
-        PointsProvider.setUbicacion( "Impresora2", "impresora",1,450,1000);
-        PointsProvider.setUbicacion( "Laboratorio Compu","laboratorio",1,800,1000);
-
         // Select either the default item (0) or the last selected item.
         selectItem(mCurrentSelectedPosition);
     }
@@ -90,6 +85,7 @@ public class NavigationDrawerFragment extends Fragment {
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
         // Indicate that this fragment would like to influence the set of actions in the action bar.
         setHasOptionsMenu(true);
     }

@@ -23,6 +23,9 @@ import android.widget.Spinner;
 
 import java.util.ArrayList;
 
+import mx.cinvestav.edu.cinveslocatorclient.RPC.client.PointsProvider;
+import mx.cinvestav.edu.cinveslocatorclient.RPC.common.MapResource;
+
 /**
  * Created by Celeste on 25/04/2015.
  */
@@ -58,7 +61,7 @@ public class menu3 extends Fragment {
                         // imageView.addt  ----------
                         //-----------------------------------------------------------AQUI VOY
                         c.drawBitmap(mapaOriginal, 0, 0, null);
-                        ArrayList<MapResource> puntos = PointsProvider.findName(text);
+                        ArrayList<MapResource> puntos = PointsProvider.getInstance().findName(text);
                         for (MapResource mr : puntos) {
                             if (mr.getType().equals("persona")) {
                                 paint.setColor(Color.BLUE);
@@ -69,7 +72,7 @@ public class menu3 extends Fragment {
                             if (mr.getType().equals("laboratorio")) {
                                 paint.setColor(Color.MAGENTA);
                             }
-                            c.drawCircle(mr.getPosition().x, mr.getPosition().y, 25.0F, paint);
+                            c.drawCircle(mr.getPosition().getX(), mr.getPosition().getY(), 25.0F, paint);
                         }
                         mapa = bitmap;
                         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight(), false);
@@ -95,21 +98,9 @@ public class menu3 extends Fragment {
         mapaOriginal = bitmap;
         //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight(), false);
         imageView.setAdjustViewBounds(true);
-        imageView.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
-        ViewTreeObserver vto = imageView.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout(){
-                try {
-                    ImageView imageView = (ImageView) getView().findViewById(R.id.imageView4);
-                    Drawable img = imageView.getDrawable();
-                    Bitmap scaledBitmap = Bitmap.createScaledBitmap(mapa, imageView.getWidth(), imageView.getHeight(), false);
-                    imageView.setImageDrawable(new BitmapDrawable(getResources(), scaledBitmap));
-                }catch(Exception ex){
+        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
+        imageView.setImageBitmap(mapa);
 
-                }
-            }
-        });
     }
 
 }

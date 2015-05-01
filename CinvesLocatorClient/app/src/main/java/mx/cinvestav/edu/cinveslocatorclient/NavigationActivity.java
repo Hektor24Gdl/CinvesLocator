@@ -1,6 +1,7 @@
 package mx.cinvestav.edu.cinveslocatorclient;
 
 import android.app.Activity;
+import android.os.StrictMode;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -17,6 +18,8 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+
+import mx.cinvestav.edu.cinveslocatorclient.RPC.client.PointsProvider;
 
 
 public class NavigationActivity extends ActionBarActivity
@@ -45,12 +48,28 @@ public class NavigationActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+
+        StrictMode.setThreadPolicy(policy);
+        try {
+            PointsProvider p = PointsProvider.getInstance();
+            p.setUbicacion("Celeste", "persona", 1, 50, 50);
+            p.setUbicacion("Andres", "persona", 1, 800, 800);
+            p.setUbicacion("Gibran", "persona", 1, 100, 100);
+            p.setUbicacion("Impresora1", "impresora", 1, 1000, 1000);
+            p.setUbicacion("Impresora2", "impresora", 1, 450, 1000);
+            p.setUbicacion("Laboratorio Compu", "laboratorio", 1, 800, 1000);
+        }catch(Exception e){
+            e.printStackTrace();;
+        }
+
     }
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
         // update the main content by replacing fragments
         Fragment obj = null;
+
         switch(position) {
             case 0:
                     obj = new menu1();
