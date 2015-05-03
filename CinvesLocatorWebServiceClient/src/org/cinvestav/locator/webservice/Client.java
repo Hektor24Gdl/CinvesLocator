@@ -1,8 +1,11 @@
 package org.cinvestav.locator.webservice;
 
+import java.util.Date;
+import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.ws.BindingProvider;
+import static jdk.nashorn.internal.objects.NativeJava.type;
 import org.cinvestav.locator.webservice.client.Agent;
 import org.cinvestav.locator.webservice.client.CinvesLocator;
 import org.cinvestav.locator.webservice.client.Location;
@@ -21,12 +24,19 @@ public class Client {
         configure("http://localhost", 8080);
         Agent agent;
         try {
-            agent = getAgent("HECTOR");
+            agent = getAgent("Celeste");
         
         System.out.println("Agent: " + agent.getName() + " Login: " + agent.getLastLogin());
         
-        Location location = getLastLocation("HECTOR");
-        System.out.println("Location: " + location.getCoordinates() + " Timestamp: " + location.getTimestamp());
+        Location location = getLastLocation("Celeste");
+        
+        StringTokenizer tokens = new StringTokenizer(location.getCoordinates(), ",");
+        String piso = tokens.nextToken();
+        String xCor = tokens.nextToken();
+        String yCor = tokens.nextToken();
+        System.out.println("Location: Id: " + location.getIdlocation() + " Piso: " + piso + " X: " + xCor + " Y: " + yCor + " Timestamp: " + location.getTimestamp());
+        
+        saveLocation("Celeste", new Date().toLocaleString(), "1,183.0389,156.31862");//
         
         } catch (LocatorException_Exception ex) {
             Logger.getLogger(Client.class.getName()).log(Level.SEVERE, null, ex);

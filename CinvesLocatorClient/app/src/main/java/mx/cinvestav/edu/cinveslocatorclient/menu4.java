@@ -19,9 +19,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 import mx.cinvestav.edu.cinveslocatorclient.RPC.client.PointsProvider;
 import mx.cinvestav.edu.cinveslocatorclient.RPC.common.MapResource;
+import mx.cinvestav.edu.cinveslocatorclient.webservice.*;
 
 /**
  * Created by Celeste on 25/04/2015.
@@ -59,18 +61,29 @@ public class menu4 extends Fragment {
                         // imageView.addt  ----------
                         //-----------------------------------------------------------AQUI VOY
                         c.drawBitmap(mapaOriginal, 0, 0, null);
-                        ArrayList<MapResource> puntos = PointsProvider.getInstance().findType(item);
-                        for(MapResource mr : puntos) {
-                            if(mr.getType().equals("persona")){
+                        TGVCinvesLocatorPortBinding port = new TGVCinvesLocatorPortBinding();
+                        try{
+                            TGVgetTypeAgentResponse agents = port.getTypeAgent(item);
+                            for (TGVagent agent : agents) {
+                                TGVlocation location = port.getLastLocation(agent.name);
+                                StringTokenizer tokens = new StringTokenizer(location.coordinates, ",");
+                                tokens.nextToken();
+                                float x = Float.parseFloat(tokens.nextToken());
+                                float y = Float.parseFloat(tokens.nextToken());
+                                /*if (mr.getType().equals("persona")) {
+                                    paint.setColor(Color.BLUE);
+                                }
+                                if (mr.getType().equals("impresora")) {
+                                    paint.setColor(Color.GREEN);
+                                }
+                                if (mr.getType().equals("laboratorio")) {
+                                    paint.setColor(Color.MAGENTA);
+                                }*/
                                 paint.setColor(Color.BLUE);
+                                c.drawCircle(x, y, 25.0F, paint);
                             }
-                            if(mr.getType().equals("impresora")){
-                                paint.setColor(Color.GREEN);
-                            }
-                            if(mr.getType().equals("laboratorio")){
-                                paint.setColor(Color.MAGENTA);
-                            }
-                            c.drawCircle(mr.getPosition().getX(), mr.getPosition().getY(), 25.0F, paint);
+                        }catch(Exception ex){
+                            System.err.println(ex);
                         }
                         mapa=bitmap;
                         Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight(), false);

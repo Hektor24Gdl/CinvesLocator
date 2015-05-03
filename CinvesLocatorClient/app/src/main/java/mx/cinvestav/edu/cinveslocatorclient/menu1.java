@@ -43,6 +43,10 @@ import android.widget.Toast;
 import mx.cinvestav.edu.cinveslocatorclient.RPC.client.PointsProvider;
 import mx.cinvestav.edu.cinveslocatorclient.RPC.common.MapResource;
 
+import mx.cinvestav.edu.cinveslocatorclient.webservice.*;
+
+import java.util.StringTokenizer;
+
 /**
  * Created by Celeste on 25/04/2015.
  */
@@ -75,8 +79,21 @@ public class menu1 extends Fragment {
         // imageView.addt  ----------
        //-----------------------------------------------------------AQUI VOY
         c.drawBitmap(img, 0, 0, null);
-        MapResource mr = PointsProvider.getInstance().getUbicacion("Celeste");
-        c.drawCircle(mr.getPosition().getX(), mr.getPosition().getY(), 25.0F, paint);
+
+        TGVCinvesLocatorPortBinding port = new TGVCinvesLocatorPortBinding();
+
+        try{
+            TGVlocation location = port.getLastLocation("Celeste");
+            System.out.println(location.coordinates);
+            StringTokenizer tokens = new StringTokenizer(location.coordinates, ",");
+            tokens.nextToken();
+            float x = Float.parseFloat(tokens.nextToken());
+            float y = Float.parseFloat(tokens.nextToken());
+            c.drawCircle(x, y, 25.0F, paint);
+        }catch(Exception ex){
+            System.err.println(ex);
+        }
+
         //Now scale to imgView
         mapa = bitmap;
         //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight(), false);

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<EasyWSDL>
+  <Info>
+    <Version>4.1.5.5</Version>
+    <AccountType>Basic</AccountType>
+    <LibrariesFolder>libs/easywsdl</LibrariesFolder>
+  </Info>
+  <Settings>
+    <Url>http://localhost:8080/CinvesLocatorServerWebService/CinvesLocator?wsdl</Url>
+    <ClassPrefix/>
+    <PackageName>mx.cinvestav.edu.cinveslocatorclient.webservice</PackageName>
+    <AddDocumentation>false</AddDocumentation>
+    <EnableAdvancedFeatures>false</EnableAdvancedFeatures>
+    <EnableMTOM>false</EnableMTOM>
+    <EncodeIllegalCharacters>true</EncodeIllegalCharacters>
+    <GenerateAsyncOperations>true</GenerateAsyncOperations>
+    <ImplementSerializable>false</ImplementSerializable>
+    <InitializeCollections>true</InitializeCollections>
+    <UseJodaTime>false</UseJodaTime>
+  </Settings>
+  <Files>
+    <File>TGVIServiceEvents.java</File>
+    <File>TGVExtendedSoapSerializationEnvelope.java</File>
+    <File>TGVtype.java</File>
+    <File>TGVLocatorException.java</File>
+    <File>TGVOperationResult.java</File>
+    <File>TGVagent.java</File>
+    <File>TGVgetTypeAgentResponse.java</File>
+    <File>TGVCinvesLocatorPortBinding.java</File>
+    <File>TGVMarshalGuid.java</File>
+    <File>TGVMarshalDate.java</File>
+    <File>TGVHelper.java</File>
+    <File>TGVFunctions.java</File>
+    <File>TGVlocation.java</File>
+  </Files>
+  <Libraries>
+    <File>ksoap2-android-assembly-3.4.0-jar-with-dependencies.jar</File>
+  </Libraries>
+</EasyWSDL>

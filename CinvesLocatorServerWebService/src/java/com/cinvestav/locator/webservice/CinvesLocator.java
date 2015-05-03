@@ -99,7 +99,7 @@ public class CinvesLocator {
     public void saveLocation(@WebParam(name = "name") String name, @WebParam(name = "timestamp") String timestamp, 
             @WebParam(name = "coordinates") String coordinates) throws LocatorException {
         try {
-            DAO.saveLocation(name, timestamp, coordinates);
+            DAO.saveLocation(timestamp, coordinates, name);
         } catch (DatabaseException ex) {
             Logger.getLogger(CinvesLocator.class.getName()).log(Level.SEVERE, null, ex);
             throw new LocatorException(ex.toString());

@@ -51,17 +51,6 @@ public class NavigationActivity extends ActionBarActivity
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
         StrictMode.setThreadPolicy(policy);
-        try {
-            PointsProvider p = PointsProvider.getInstance();
-            p.setUbicacion("Celeste", "persona", 1, 50, 50);
-            p.setUbicacion("Andres", "persona", 1, 800, 800);
-            p.setUbicacion("Gibran", "persona", 1, 100, 100);
-            p.setUbicacion("Impresora1", "impresora", 1, 1000, 1000);
-            p.setUbicacion("Impresora2", "impresora", 1, 450, 1000);
-            p.setUbicacion("Laboratorio Compu", "laboratorio", 1, 800, 1000);
-        }catch(Exception e){
-            e.printStackTrace();;
-        }
 
     }
 

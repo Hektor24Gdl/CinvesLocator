@@ -26,7 +26,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Location.findByIdlocation", query = "SELECT l FROM Location l WHERE l.idlocation = :idlocation"),
     @NamedQuery(name = "Location.findByTimestamp", query = "SELECT l FROM Location l WHERE l.timestamp = :timestamp"),
     @NamedQuery(name = "Location.findByCoordinates", query = "SELECT l FROM Location l WHERE l.coordinates = :coordinates"),
-    @NamedQuery(name = "Location.findByAgent", query = "SELECT l FROM Location l WHERE l.agenteIdagente.name = :name ORDER BY l.timestamp DESC")})
+    @NamedQuery(name = "Location.findByAgent", query = "SELECT l FROM Location l WHERE l.agenteIdagente.name = :name")})
 public class Location implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

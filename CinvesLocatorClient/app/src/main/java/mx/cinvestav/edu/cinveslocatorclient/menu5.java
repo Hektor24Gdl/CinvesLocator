@@ -87,7 +87,7 @@ public class menu5 extends Fragment {
                         // imageView.addt  ----------
                         //-----------------------------------------------------------AQUI VOY
                         c.drawBitmap(img, 0, 0, null);
-                        ArrayList<MapResource> puntos = PointsProvider.getInstance().getAll();
+                        /*ArrayList<MapResource> puntos = PointsProvider.getInstance().getAll();
                         for (MapResource mr : puntos) {
                             if (mr.getType().equals("persona")) {
                                 paint.setColor(Color.BLUE);
@@ -99,7 +99,7 @@ public class menu5 extends Fragment {
                                 paint.setColor(Color.MAGENTA);
                             }
                             c.drawCircle(mr.getPosition().getX(), mr.getPosition().getY(), 25.0F, paint);
-                        }
+                        }*/
                         //Now scale to imgView
                         mapa = bitmap;
                         //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight(), false);

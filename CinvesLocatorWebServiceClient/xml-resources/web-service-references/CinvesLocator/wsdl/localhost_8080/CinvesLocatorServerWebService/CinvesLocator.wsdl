@@ -4,14 +4,20 @@
 <xsd:import namespace="http://webservice.locator.cinvestav.com/" schemaLocation="http://localhost:8080/CinvesLocatorServerWebService/CinvesLocator?xsd=1"/>
 </xsd:schema>
 </types>
+<message name="saveAgent">
+<part name="parameters" element="tns:saveAgent"/>
+</message>
+<message name="saveAgentResponse">
+<part name="parameters" element="tns:saveAgentResponse"/>
+</message>
+<message name="LocatorException">
+<part name="fault" element="tns:LocatorException"/>
+</message>
 <message name="getAgent">
 <part name="parameters" element="tns:getAgent"/>
 </message>
 <message name="getAgentResponse">
 <part name="parameters" element="tns:getAgentResponse"/>
-</message>
-<message name="LocatorException">
-<part name="fault" element="tns:LocatorException"/>
 </message>
 <message name="getTypeAgent">
 <part name="parameters" element="tns:getTypeAgent"/>
@@ -31,13 +37,12 @@
 <message name="saveLocationResponse">
 <part name="parameters" element="tns:saveLocationResponse"/>
 </message>
-<message name="saveAgent">
-<part name="parameters" element="tns:saveAgent"/>
-</message>
-<message name="saveAgentResponse">
-<part name="parameters" element="tns:saveAgentResponse"/>
-</message>
 <portType name="CinvesLocator">
+<operation name="saveAgent">
+<input wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/saveAgentRequest" message="tns:saveAgent"/>
+<output wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/saveAgentResponse" message="tns:saveAgentResponse"/>
+<fault message="tns:LocatorException" name="LocatorException" wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/saveAgent/Fault/LocatorException"/>
+</operation>
 <operation name="getAgent">
 <input wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/getAgentRequest" message="tns:getAgent"/>
 <output wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/getAgentResponse" message="tns:getAgentResponse"/>
@@ -58,14 +63,21 @@
 <output wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/saveLocationResponse" message="tns:saveLocationResponse"/>
 <fault message="tns:LocatorException" name="LocatorException" wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/saveLocation/Fault/LocatorException"/>
 </operation>
-<operation name="saveAgent">
-<input wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/saveAgentRequest" message="tns:saveAgent"/>
-<output wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/saveAgentResponse" message="tns:saveAgentResponse"/>
-<fault message="tns:LocatorException" name="LocatorException" wsam:Action="http://webservice.locator.cinvestav.com/CinvesLocator/saveAgent/Fault/LocatorException"/>
-</operation>
 </portType>
 <binding name="CinvesLocatorPortBinding" type="tns:CinvesLocator">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+<operation name="saveAgent">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+<fault name="LocatorException">
+<soap:fault name="LocatorException" use="literal"/>
+</fault>
+</operation>
 <operation name="getAgent">
 <soap:operation soapAction=""/>
 <input>
@@ -103,18 +115,6 @@
 </fault>
 </operation>
 <operation name="saveLocation">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-<fault name="LocatorException">
-<soap:fault name="LocatorException" use="literal"/>
-</fault>
-</operation>
-<operation name="saveAgent">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

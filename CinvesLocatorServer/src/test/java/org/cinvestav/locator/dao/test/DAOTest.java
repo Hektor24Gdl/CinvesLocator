@@ -64,11 +64,11 @@ public class DAOTest {
     
      @Test
     public void saveAgent() throws Exception {
-        DAO.saveAgent("AGENTE", "MOBILE", "2015-28-04 13:00:00", "Agent");
+        DAO.saveAgent("AGENTE", "MOBILE", "2015-28-04 13:00:00", "Persona");
     }
     
      @Test
     public void saveAgentLocation() throws Exception {
-        DAO.saveLocation("2015-28-04 13:00:00", "coordinates", "HECTOR");
+        DAO.saveLocation("2015-03-05 13:00:00", "coordinates", "HECTOR");
     }
 }

@@ -18,8 +18,12 @@ import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 
+import java.util.Date;
+import java.util.StringTokenizer;
+
 import mx.cinvestav.edu.cinveslocatorclient.RPC.client.PointsProvider;
 import mx.cinvestav.edu.cinveslocatorclient.RPC.common.MapResource;
+import mx.cinvestav.edu.cinveslocatorclient.webservice.*;
 
 /**
  * Created by Celeste on 25/04/2015.
@@ -53,8 +57,20 @@ public class menu2 extends Fragment {
         // imageView.addt  ----------
         //-----------------------------------------------------------AQUI VOY
         c.drawBitmap(img, 0, 0, null);
-        MapResource mr = PointsProvider.getInstance().getUbicacion("Celeste");
-        c.drawCircle(mr.getPosition().getX(), mr.getPosition().getY(), 25.0F, paint);
+
+        TGVCinvesLocatorPortBinding port = new TGVCinvesLocatorPortBinding();
+
+        try{
+            TGVlocation location = port.getLastLocation("Celeste");
+            StringTokenizer tokens = new StringTokenizer(location.coordinates, ",");
+            tokens.nextToken();
+            float x = Float.parseFloat(tokens.nextToken());
+            float y = Float.parseFloat(tokens.nextToken());
+            c.drawCircle(x, y, 25.0F, paint);
+        }catch(Exception ex){
+            System.err.println(ex);
+        }
+
         //Now scale to imgView
         mapa = bitmap;
         //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight(), false);
@@ -71,7 +87,15 @@ public class menu2 extends Fragment {
                 float scaleY =   (float)mapa.getHeight() / (float)imageView.getHeight() ;
                 xTouch *= scaleX;
                 yTouch *= scaleY;
-                PointsProvider.getInstance().setUbicacion("Celeste","persona",1,(int)xTouch,(int)yTouch);
+
+                String coordinates = Integer.toString(1) + "," + Float.toString(xTouch) + "," + Float.toString(yTouch);
+                TGVCinvesLocatorPortBinding port = new TGVCinvesLocatorPortBinding();
+
+                try{
+                    port.saveLocation("Celeste", new Date().toLocaleString(), coordinates);
+                }catch(Exception ex){
+                    System.err.println(ex);
+                }
 
                 //Create bitmap from mapa
                 Bitmap img = BitmapFactory.decodeResource(getResources(), R.mipmap.mapa1);
@@ -85,8 +109,17 @@ public class menu2 extends Fragment {
                 // imageView.addt  ----------
                 //-----------------------------------------------------------AQUI VOY
                 c.drawBitmap(img, 0, 0, null);
-                MapResource mr = PointsProvider.getInstance().getUbicacion("Celeste");
-                c.drawCircle(mr.getPosition().getX(), mr.getPosition().getY(), 25.0F, paint);
+
+                try{
+                    TGVlocation location = port.getLastLocation("Celeste");
+                    StringTokenizer tokens = new StringTokenizer(location.coordinates, ",");
+                    tokens.nextToken();
+                    float x = Float.parseFloat(tokens.nextToken());
+                    float y = Float.parseFloat(tokens.nextToken());
+                    c.drawCircle(x, y, 25.0F, paint);
+                }catch(Exception ex){
+                    System.err.println(ex);
+                }
                 //Now scale to imgView
                 mapa = bitmap;
                 //Bitmap scaledBitmap = Bitmap.createScaledBitmap(bitmap, imageView.getWidth(), imageView.getHeight(), false);

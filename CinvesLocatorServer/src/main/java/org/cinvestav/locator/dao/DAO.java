@@ -2,6 +2,11 @@ package org.cinvestav.locator.dao;
 
 import org.cinvestav.ex.DatabaseException;
 import java.io.Serializable;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -55,7 +60,7 @@ public class DAO {
         resultList = query.list();
 
         s.getTransaction().commit();
-
+        
         return resultList;
     }
     
@@ -111,7 +116,7 @@ public class DAO {
     
     public static Location getLastLocation(String value) throws DatabaseException {
         List<Location> location = getObject(Location.class, LOC_AGENT, "name", value);
-        
+
         if(location.size() > 0){
             return location.get(0);
         }
@@ -120,8 +125,14 @@ public class DAO {
     }
     
     public static void saveLocation(String timestamp, String coordinates, String agent) throws DatabaseException{
+        
+        Location location = getLastLocation(agent);
+        if(location == null){
+            location = new Location();
+        }
+        
         Agent ag = getAgent(agent);
-        Location location = new Location();
+        
         location.setAgenteIdagente(ag);
         location.setTimestamp(timestamp);
         location.setCoordinates(coordinates);

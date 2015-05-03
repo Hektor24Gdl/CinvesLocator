@@ -211,7 +211,7 @@ public class PointsProvider implements Resguardo{
 		}		
 	}
 	public static void main(String args[]){
-		PointsProvider p = PointsProvider.getInstance();
+		/*PointsProvider p = PointsProvider.getInstance();
         p.setUbicacion( "Celeste", "persona",1,50,50 );
         p.setUbicacion( "Andres","persona",1,800,800);
         p.setUbicacion( "Gibran","persona",1,100,100 );
@@ -221,7 +221,7 @@ public class PointsProvider implements Resguardo{
         MapResource mr = p.getUbicacion("Celeste");
         ArrayList<MapResource> all = p.getAll();
         ArrayList<MapResource> findType  = p.findType("impresora");
-        ArrayList<MapResource> findName = p.findName("el");
+        ArrayList<MapResource> findName = p.findName("el");*/
         
 
 	}
